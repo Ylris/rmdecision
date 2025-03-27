@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4"
+      main_tree_to_execute="main">
+  <BehaviorTree ID="main">
+    <Fallback>
+      <wait_for_start/>
+      <Sequence>
+        <Fallback>
+          <Sequence>
+            <IfAsked/>
+            <Gimbal_handle/>
+          </Sequence>
+          <Fallback>
+            <Sequence>
+              <IfOutposeAlive/>
+              <Fallback>
+                <Sequence>
+                  <S1/>
+                  <Fallback>
+                    <Sequence>
+                      <IfGoToStopEngineer/>
+                      <GoToStopEngineer_handle/>
+                    </Sequence>
+                    <Sequence>
+                      <IfGoToEnemyOutpose/>
+                      <GoToEnemyOutpose_handle/>
+                    </Sequence>
+                    <Sequence>
+                      <IfGoToStopHero/>
+                      <GoToStopHero_handle/>
+                    </Sequence>
+                  </Fallback>
+                </Sequence>
+                <Sequence>
+                  <S2/>
+                  <Fallback>
+                    <Sequence>
+                      <IfDefendOutpose/>
+                      <S2GoToOutpose/>
+                    </Sequence>
+                    <Sequence>
+                      <S2DefendOutpose/>
+                    </Sequence>
+                  </Fallback>
+                </Sequence>
+                <Sequence>
+                  <S3/>
+                  <Sequence>
+                    <S3Patro/>
+                  </Sequence>
+                </Sequence>
+              </Fallback>
+            </Sequence>
+            <Sequence>
+              <IfAddHp/>
+              <addhp_handle/>
+            </Sequence>
+            <Sequence>
+              <IfDefend/>
+              <defend_handle/>
+            </Sequence>
+            <Sequence>
+              <IfAttack/>
+              <attack_handle/>
+            </Sequence>
+            <Sequence>
+              <IfGuard/>
+              <Guard/>
+            </Sequence>
+          </Fallback>
+        </Fallback>
+        <Fallback>
+          <Sequence>
+            <IfBuyToRelive/>
+            <BuyToRelive_handle/>
+          </Sequence>
+          <Sequence>
+            <IfBuyAmmo/>
+            <BuyAmmo_handle/>
+          </Sequence>
+          <Sequence>
+            <IfBuyAmmoRemotely/>
+            <BuyAmmoRemotely_handle/>
+          </Sequence>
+          <Sequence>
+            <IfBuyHp/>
+            <BuyHp_handle/>
+          </Sequence>
+          <AlwaysSuccess/>
+        </Fallback>
+      </Sequence>
+    </Fallback>
+  </BehaviorTree>
+
+  <!-- Description of Node Models (used by Groot) -->
+  <TreeNodesModel>
+    <Action ID="BuyAmmoRemotely_handle"
+            editable="true"/>
+    <Action ID="BuyAmmo_handle"
+            editable="true"/>
+    <Action ID="BuyHp_handle"
+            editable="true"/>
+    <Action ID="BuyToRelive_handle"
+            editable="true"/>
+    <Action ID="Gimbal_handle"
+            editable="true"/>
+    <Action ID="GoToEnemyOutpose_handle"
+            editable="true"/>
+    <Action ID="GoToStopEngineer_handle"
+            editable="true"/>
+    <Action ID="GoToStopHero_handle"
+            editable="true"/>
+    <Action ID="Guard"
+            editable="true"/>
+    <Condition ID="IfAddHp"
+               editable="true"/>
+    <Condition ID="IfAsked"
+               editable="true"/>
+    <Condition ID="IfAttack"
+               editable="true"/>
+    <Condition ID="IfBuyAmmo"
+               editable="true"/>
+    <Condition ID="IfBuyAmmoRemotely"
+               editable="true"/>
+    <Condition ID="IfBuyHp"
+               editable="true"/>
+    <Condition ID="IfBuyToRelive"
+               editable="true"/>
+    <Condition ID="IfDefend"
+               editable="true"/>
+    <Condition ID="IfGoToEnemyOutpose"
+               editable="true"/>
+    <Condition ID="IfGoToStopEngineer"
+               editable="true"/>
+    <Condition ID="IfGoToStopHero"
+               editable="true"/>
+    <Condition ID="IfGuard"
+               editable="true"/>
+    <Condition ID="IfOutposeAlive"
+               editable="true"/>
+    <Condition ID="S1"
+               editable="true"/>
+    <Condition ID="S2"
+               editable="true"/>
+    <Action ID="S2GoToOutpose"
+            editable="true"/>
+    <Condition ID="S3"
+               editable="true"/>
+    <Action ID="S3Patro"
+            editable="true"/>
+    <Action ID="addhp_handle"
+            editable="true"/>
+    <Action ID="attack_handle"
+            editable="true"/>
+    <Action ID="defend_handle"
+            editable="true"/>
+    <Condition ID="wait_for_start"
+               editable="true"/>
+  </TreeNodesModel>
+
+</root>

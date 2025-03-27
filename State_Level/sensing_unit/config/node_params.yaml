@@ -1,0 +1,88 @@
+# 哨兵决策策略请参看：https://cquqianli.feishu.cn/wiki/Maetw4XdPiKwYkkyhY0c1r87ngM
+# point 结尾的参数表示为导航去单点，仅可以传入一个点
+# points 结尾的参数为多点巡逻，可传入多个点
+
+/rm_decision_node:
+  ros__parameters:
+    strategy: 1  #比赛时使用的策略组 有1 2 3三个
+
+    #parameter fpr strategy 1
+    S1_Stop_Engineer_point: [ 1.15, 2.21, 0.0 ] #策略一：阻止工程位置
+    S1_Stop_Hero_points: [ 5.23, 0.78, 0.0,
+                           5.04, -2.97, 0.0 ]  #策略一：打完前哨站后去阻止英雄
+    S1_Outpost_point: [ 3.7, 2.9, 0.0 ] #策略一：打地方前哨站位置
+
+    #parameter for strategy 2
+    S2_Outpose_point: [ 6.79, 7.48, 0.0 ] #策略二：打前哨站位置
+    S2_Defend_point: [ 8.77, -4.55, 0.0 ]
+
+    #parameter for strategy 3
+    S3_Patro_points: [ -0.3, 1.5, 0.0,
+                       -1.3, 1.5, 0.0,
+                       -1.3, -1.5, 0.0,
+                       -0.3, -1.5, 0.0 ]
+
+    #patro points
+    #己方前哨站爆后，哨兵默认巡逻位置
+    Guard_points: [ 1.15, 2.21, 0.0,
+              -0.19, 1.68, 0.0,
+              0.18, -1.52, 0.0,
+              2.25, -1.95, 0.0,
+              -0.19, 1.68, 0.0,
+              0.18, -1.52, 0.0]
+    #如果上坡失败，或者选择不上坡，哨兵会前往的巡逻位置
+    Guard_points2: [ 0.0, -2.0, 0.0,
+                     1.0,-1.0,0.0 ]
+    #死过一次巡逻点
+    Guard_points3:
+      [ 0.0, -2.0, 0.0,
+        1.0,-1.0,0.0 ]
+
+    #ohter location points
+    self_addhp_point: [ -1.45, -6.89, 0.0 ]  #哨兵加血位置
+    self_base_point: [ 0.0, 0.0, 0.0 ]  #哨兵保护基地位置
+    #坡区位置
+    po_area1: [-2000.0, 10000.0, 0.0,
+              -2000.0, 20000.0, 0.0,
+              -3000.0, 20000.0, 0.0,
+              -3000.0, 10000.0, 0.0]
+    po_area2: [1000.0, -1000.0, 0.0,
+               1200.0, -1000.0, 0.0,
+               1200.0, -2000.0, 0.0,
+               1000.0, -2000.0, 0.0]
+    po_area3: [2000.0, 1000.0, 0.0,
+              2000.0, 2000.0, 0.0,
+              3000.0, 2000.0, 0.0,
+              3000.0, 1000.0, 0.0]
+
+    #下面是决策模式触发的阈值
+    not_buy_but_relive: 1 #哨兵是否读条复活 1:是 2:否 若值为2，哨兵不会复活，即使此时读条结束
+    sentry_want_shangpo: 1 #哨兵是否上坡 1:要上 2:不上 选择不上程序中所有和上坡有关的决策将一直返回false
+    addhp_threshold: 0 #加血阈值，低于这个血量就会去加血
+    addhp_full_threshold: 350 #加血满阈值，防止哨兵到了加血点就回去
+    defend_threshold: 0  #当基地血量少于此值，就会触发防御模式
+    buy_to_relive_goldcoin_threshold: 40000 #当金币数大于此值，会请求花金币复活
+
+    #远程买弹的条件有两种 1、无敌且有钱 2、不无敌，但血多且有钱 下面的参数需要同时满足多个才会请求远程买弹
+    buy_ammo_remotely_ammo_threshold_when_wudi: 0 #无敌时，子弹数小于此值
+    buy_ammo_remotely_ammo_threshold_when_youdi: 0 #不无敌时，子弹数小于此值
+    buy_ammo_remotely_hp_threshold_when_youdi: 0 #不无敌时，自身血量大于此值
+    buy_ammo_remotely_goldcoin_threshold_when_wudi: 10000 #无敌时，当金币数大于此值
+    buy_ammo_remotely_goldcoin_threshold_when_youdi: 40000 #不无敌时，当金币数大于此值
+
+    #花钱远程补血的条件 血少且钱多
+    buy_hp_remotely_hp_threshold: 0
+    buy_hp_remotely_goldcoin_threshold: 300000
+
+    #回基地补弹条件 没弹有点钱
+    buy_ammo_local_ammo_threshold: 0
+    buy_ammo_local_goldcoin_threshold: 50000
+
+    self_outpose_threshold: 190 #当己方前哨站血量少于此值，会从出击策略转为防御策略
+    buy_ammo_num_at_a_time: 0 #哨兵每一次请求买弹的买弹量
+
+    time_to_stop_enginner: 1 #S1决策中，哨兵停留在工程点的时间
+    addhp_timeout: 25 #加血最大用时
+    shangpo_timeout: 10 #上坡最大用时
+    if_open_movestats: 2 #是否开启移动状态 1:开启 2:关闭
+
